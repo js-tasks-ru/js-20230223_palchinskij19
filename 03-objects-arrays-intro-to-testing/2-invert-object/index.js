@@ -9,8 +9,7 @@ export function invertObj(obj) {
    if (!obj) return; 
 
    for (let [key, value] of Object.entries(obj)) {
-      [key, value] = [value, key]; 
-      result[key] = value;
+      result[value] = key;
    }
    
    return result;
