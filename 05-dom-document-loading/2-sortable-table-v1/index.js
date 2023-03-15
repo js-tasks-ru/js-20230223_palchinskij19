@@ -92,7 +92,7 @@ export default class SortableTable {
       }
 
       if (sortType === 'string') {
-        return orders[order] * (firstItem[field].localeCompare(secodItem[field], ['ru', 'en']));
+        return orders[order] * firstItem[field].localeCompare(secodItem[field], ['ru', 'en']);
       }
     });
   }
@@ -107,14 +107,28 @@ export default class SortableTable {
     });
 
     currentColumn.dataset.order = order;
-    this.subElement.body.innerHTML = this.getTableRows(sortedData);
+    this.subElements.body.innerHTML = this.getTableRows(sortedData);
   }
 
   render() {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = this.getTemplate();
     this.element = wrapper.firstElementChild;
-    this.subElement = this.getSubelements();
+    this.subElements = this.getSubelements();
   }
+
+  remove() {
+    clearTimeout(this.timerId);
+
+    if (this.element) {
+      this.element.remove();
+    }
+ } 
+ 
+ destroy() {
+    this.remove();
+    this.element = null;
+    this.subElements = null;
+ }
 }
 
