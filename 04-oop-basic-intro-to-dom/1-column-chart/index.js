@@ -49,7 +49,7 @@ export default class ColumnChart {
       const elements = this.element.querySelectorAll('[data-element]');
 
       for (const element of elements) {
-         const name = element.data.element;
+         const name = element.dataset.element;
          result[name] = element;
       }
 
