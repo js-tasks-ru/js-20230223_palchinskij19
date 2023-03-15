@@ -43,12 +43,6 @@
       orders.append(ordersChart.element);
       sales.append(salesChart.element);
       customers.append(customersChart.element);
-      setTimeout(() => {
-        console.log('update');
-        console.log('sales', sales);
-        console.log('sales.firstElementChil', sales.firstElementChild);
-        sales.firstElementChild.replaceWith(salesChart.update([10, 20, 30, 40, 50]))
-      }, 1000)
     </script>
   </body>
 </html>
