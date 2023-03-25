@@ -11,20 +11,23 @@ export default class ColumnChart {
       label = '',
       formatHeading = data => data,
       link = '',
-      range = {},
+      range = {
+         from: new Date(),
+         to: new Date(),
+      },
       url = '',
    } = {}) {
       this.data = data;
       this.label = label;
       this.link = link;
       this.range = range;
-      this.url = url;
+      this.url = new URL(url, BACKEND_URL);
       this.formatHeading = formatHeading;
 
       this.render();
       this.update(
-         this.range?.from,
-         this.range?.to
+         this.range.from,
+         this.range.to
       );
    }
 
@@ -95,10 +98,9 @@ export default class ColumnChart {
 
    async loadData(from, to) {
       try {
-         const url = new URL(this.url, BACKEND_URL);
-         url.searchParams.set('from', from);
-         url.searchParams.set('to', to);
-         const response = await fetchJson(url);
+         this.url.searchParams.set('from', from);
+         this.url.searchParams.set('to', to);
+         const response = await fetchJson(this.url);
          return response;
       } catch (error) {
          console.error(`loadData error: ${error}`);
